@@ -3,7 +3,7 @@ import cv2
 import math
 import time
 from datetime import datetime
-import winsound  # Use only on Windows. Use `playsound` on Linux/macOS if needed.
+import winsound
 
 camera = cv2.VideoCapture(0)
 camera.set(3, 720)
@@ -40,11 +40,11 @@ while True:
             label = labels[cls_id]
             conf = math.ceil(box.conf[0] * 100)
 
-            # Color coding by object type
+
             if label == 'knife':
                 color = (0, 0, 255)
                 thickness = 4
-                winsound.Beep(1000, 150)  # Beep on knife detection
+                winsound.Beep(1000, 150)
             elif label == 'person':
                 color = (0, 255, 255)
                 thickness = 3
@@ -58,7 +58,7 @@ while True:
             cv2.rectangle(frame, (x1, y1), (x2, y2), color, thickness)
             cv2.putText(frame, f"{label} {conf:.2f}%", (x1, y1 - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
-    # Display FPS and timestamp
+
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     cv2.putText(frame, f"FPS: {fps:.2f}", (10, 25), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 0), 2)
     cv2.putText(frame, timestamp, (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 0), 2)
@@ -70,3 +70,4 @@ while True:
 
 camera.release()
 cv2.destroyAllWindows()
+
